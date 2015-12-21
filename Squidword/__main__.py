@@ -1,4 +1,11 @@
 import sys
 #command module for executing the package
 
-print(sys.argv[1] + "foo")
+if sys.argv[1] == 'put':
+    pass
+elif sys.argv[1] == 'random':
+    pass
+elif sys.argv[1] == 'statement':
+    pass
+elif sys.argv[1] == 'link':
+    pass
