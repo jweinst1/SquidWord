@@ -1,5 +1,5 @@
 import sys, os
-from Squidword import Sentence_Trie, textparse, Trie_Utils
+from Squidword import Sentence_Trie, textparse, Trie_Utils, CLI_funcs
 
 #command module for executing the package
 
@@ -103,8 +103,8 @@ elif sys.argv[1] == 'getfile':
 
 elif sys.argv[1] == 'init':
     init_squid()
-elif sys.argv[1] == 'statement':
-    pass
+elif sys.argv[1] == 'CLI':
+    CLI_funcs.CLI_run()
 elif sys.argv[1] == 'link':
     get_trie_from_link(sys.argv[2], sys.argv[3])
 
