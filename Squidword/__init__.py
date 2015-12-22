@@ -1,3 +1,1 @@
-import Squidword.textparse
-import Squidword.Sentence_Trie
-import Squidword.Trie_Utils
+#Sentence trie object, that binds phrases into tries, for easy look up and storage
