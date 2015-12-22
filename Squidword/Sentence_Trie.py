@@ -5,7 +5,9 @@ class strie (object):
 
     def __init__(self, wordfile=None):
         if wordfile:
-            with open(wordfile, 'r') as wordbase:
+            import os
+            dirpath = os.path.join(".squidword", wordfile)
+            with open(dirpath, 'r') as wordbase:
                 words = json.loads(wordbase.read())
                 self.trie = words
         else:
@@ -37,8 +39,10 @@ class strie (object):
                 return False
         return True
     def savetrie(self, docname):
+        import os
         word_data = json.dumps(self.trie)
-        with open(docname, 'w') as wordbase:
+        dirpath = os.path.join(".squidword", docname)
+        with open(dirpath, 'w') as wordbase:
             wordbase.write(word_data)
             wordbase.close()
             return "Text is Stored"

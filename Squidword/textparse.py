@@ -4,7 +4,7 @@ import re
 class S_classify:
     @staticmethod
     def issentence(string):
-        return bool(re.match(r"^[a-zA-Z1-9 ,;':]+\.$", string))
+        return bool(re.match(r"^[a-zA-Z1-9,;':]+ [a-zA-Z1-9, ;':]+\.$", string))
 
     @staticmethod
     def iswordseq(string):
@@ -20,7 +20,7 @@ class S_classify:
 
     @staticmethod
     def contains_sentence(string):
-        return bool(re.search(r"[a-zA-Z1-9 ,;':]+\.", string))
+        return bool(re.search(r"[a-zA-Z1-9,;':]+ [a-zA-Z1-9, ;':]+\.", string))
 
     @staticmethod
     def contains_question(string):
