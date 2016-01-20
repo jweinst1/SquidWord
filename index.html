@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Squidword by jweinst1</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Squidword</h1>
+        <h2>A web crawler storage system for storing statements and questions in a trie-like JSON format</h2>
+        <a href="https://github.com/jweinst1/SquidWord" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="squidword" class="anchor" href="#squidword" aria-hidden="true"><span class="octicon octicon-link"></span></a>Squidword</h1>
+
+<p>Squidword is a python command line program that can compress written English language into JSON data via the form of sentence tries. This makes a great method for checking grammar, or natural language processing.</p>
+
+<p>Normally, tries are a type of prefix structure used for looking up words, in a manner which does not include collisions, such as with Hash tables. Squidword uses tries to store statements, either sentences or questions, for looking up.</p>
+
+<h2>
+<a id="storing" class="anchor" href="#storing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Storing</h2>
+
+<p>Squidword creates sentence tries by splitting a string of sentence by the <code>" "</code> character, and then creating a node for each word in the trie. Repeated words from different statements in the same order are bound to the same node. Here is an example:</p>
+
+<pre><code>&gt;&gt;&gt; f = strie()
+&gt;&gt;&gt; f.statement("People don't love corn.")
+&gt;&gt;&gt; f.statement("People do love corn.")
+&gt;&gt;&gt; f.statement("People can love corn.")
+&gt;&gt;&gt; f.statement("People could love corn.")
+&gt;&gt;&gt; f
+{'People': 
+    {'do': {'love': {'corn.': {}}}, 
+    'could': {'love': {'corn.': {}}}, 
+    'can': {'love': {'corn.': {}}}, 
+    "don't": {'love': {'corn.': {}}}}}
+</code></pre>
+
+<p>The tries are implemented with Python builtin dictionaries to easily allow them to be written to JSON format. All of the language files can be accessed with command line arguments, since Squidword is bundled in a Python package.</p>
+
+<h2>
+<a id="commands" class="anchor" href="#commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>Commands</h2>
+
+<p>These are the commands that can be run from the command line. The notation <code>&lt;&gt;</code> signifies a custom paramter with no brackets.</p>
+
+<h4>
+<a id="squidword-start-filename-langname-" class="anchor" href="#squidword-start-filename-langname-" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>Squidword start &lt;Filename&gt; &lt;langname&gt;</code> :</h4>
+
+<p>Scans and parses a file for English sentences, questions, and other statements, into a new JSON file in the <code>.squidword</code> directory. <code>langname</code> should not have any extension on it.</p>
+
+<h4>
+<a id="squidword-put-filename-langname-" class="anchor" href="#squidword-put-filename-langname-" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>Squidword put &lt;Filename&gt; &lt;langname&gt;</code> :</h4>
+
+<p>Scans and parses a file for English sentences, questions, and other statements, into an existing JSON language file in the <code>.squidword</code> directory. Will not work if  as a path does not exist.</p>
+
+<h4>
+<a id="squidword-files-" class="anchor" href="#squidword-files-" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>Squidword files</code> :</h4>
+
+<p>Prints out a list of all files that exist in the <code>.squidword</code> directory.</p>
+
+<h4>
+<a id="squidword-random-langname-" class="anchor" href="#squidword-random-langname-" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>Squidword random &lt;langname&gt;</code> :</h4>
+
+<p>Prints out a random statement from one of the JSON sentence tries stored in the package. It constructs the statement randomly by searching the tree with randomly selected nodes.</p>
+
+<h4>
+<a id="squidword-getfile-langname-" class="anchor" href="#squidword-getfile-langname-" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>Squidword getfile &lt;langname&gt;</code> :</h4>
+
+<p>Copies one of the JSON files stored in the <code>.squidword</code> directory to the current directory the package is stored in.</p>
+
+<h4>
+<a id="squidword-init-" class="anchor" href="#squidword-init-" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>Squidword init</code> :</h4>
+
+<p>Creates the <code>.squidword</code> directory as a subdirectory. This must always be done before any other command in the program is used.</p>
+
+<h4>
+<a id="squidword-link-linkname-langname-" class="anchor" href="#squidword-link-linkname-langname-" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>Squidword link &lt;linkname&gt; &lt;langname&gt;</code> :</h4>
+
+<p>Takes a url address, and parses the loaded HTML file for English sentences, questions, other statements, into a new or existing JSON file of the name langname.</p>
+
+<h4>
+<a id="squidword-cli" class="anchor" href="#squidword-cli" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>Squidword CLI</code>:</h4>
+
+<p>Initiates a command line interface session, where you can commit statements and sentences to a trie one by one and reference them individually. This gives a simple way for a user to understand the data structure and it's potential uses.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/jweinst1/SquidWord/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/jweinst1/SquidWord/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/jweinst1/SquidWord"></a> is maintained by <a href="https://github.com/jweinst1">jweinst1</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
